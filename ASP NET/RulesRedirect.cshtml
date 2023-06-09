@@ -1,0 +1,22 @@
+﻿@page
+@model WebApplication6.Pages.RulesRedirectModel
+@{
+    var rules = HttpContext.Session.GetString("rules");
+    var rule = Request.Form["rule"];
+
+    if(rule != "")
+    {
+        if (rules != null && rules.Length == 0)
+        {
+            rules = $"{Request.Form["rule"]};";
+        }
+        else
+        {
+            rules = $"{rules}{rule};";
+        }
+        HttpContext.Session.SetString("rules", rules);
+    }
+
+    Response.Redirect("Rules");
+
+}
